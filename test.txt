@@ -1,0 +1,20 @@
+{
+  "Genre": "choral",
+  "Content": "Music and lyrics",
+  "Languages": "english",
+  "PublicDomain": "yes",
+  "Samples": "yes",
+  "Publishers": "yes",
+  "Publisher": "aaa",
+  "FullName": "aaa",
+  "Role": "Author",
+  "ProNumber": "111",
+  "ProAffiliation": "111",
+  "WritersShare": "106",
+  "Artists": "yes",
+  "Recordings": "yes",
+  "Film": "yes",
+  "Title": "1111",
+  "LegalName": "11111",
+  "Name": "Animation"
+}
