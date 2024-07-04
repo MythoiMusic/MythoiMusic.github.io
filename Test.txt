@@ -1,0 +1,20 @@
+{
+  "Genre": "opera",
+  "Content": "Music and lyrics",
+  "Languages": "japanese",
+  "PublicDomain": "yes",
+  "Samples": "no",
+  "Publishers": "no",
+  "Publisher": "Mythoi Music",
+  "FullName": "Mary Lucia Darst",
+  "Role": "Composer/Author",
+  "ProNumber": "000000",
+  "ProAffiliation": "ASCAP",
+  "WritersShare": "200",
+  "Artists": "no",
+  "Recordings": "yes",
+  "Film": "no",
+  "Title": "Blah blah",
+  "LegalName": "MLD",
+  "Name": "Play"
+}
