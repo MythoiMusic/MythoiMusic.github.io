@@ -47,7 +47,7 @@ END
    {my $m = $m[$i];
     say STDERR sprintf "%6d %s", $i+1, $$m{file};
     push @h, join ' ', "<tr>", map {"<td>".$$m{$_}} @k;
-    push @c, join ', ',    map {"$_"} map {$$m{$_}} @k;
+    push @c, join ', ',           map {qq("$$m{$_}")} @k;
    }
   push @h, <<END;
 </table>
