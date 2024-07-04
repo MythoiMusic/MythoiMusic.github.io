@@ -14,6 +14,7 @@
             overflow-y: scroll;
             font-family: monospace;
         }
+    #submit {height: 5vh; background-color: #009150; font-weight: bold; font-size: 3vh;}
 </style>
 
 <body>
@@ -158,7 +159,7 @@
 
   <label for="proAffiliation">PRO Affiliation: <input type="text" id="proAffiliation" name="proAffiliation" required=1> </label>
 
-  <label for="writersShare">Writer's Share (Maximum 200%): <input type="number" id="writersShare" name="writersShare" min="0" max="200" required=1></label>
+  <label for="writersShare">Writer's Share (Maximum 200%): <input type="number" id="writersShare" name="writersShare" min="0" max="200" required=1></label>
 </fieldset>
 
 
@@ -215,15 +216,19 @@
 <label><input type="radio" name="name" value="Treatment"    required=1>Treatment    </label>
 </fieldset>
 
-<input type="submit" value="Submit">
+<input id="submit" type="submit" value="Save">
 </form>
 
-<div id="dlContainer" class="container"></div>
+<p>Fill out the form, press save, then copy the data that appears in the text
+area below into a file, by itself, in your
+<a href="https://github.com">GitHub</a> repository.
+
+<p>Upload the corresponding sheet music or audio file into your repository as
+well to complete your registration of this piece of music.</p>
 
 <textarea id="jsonDisplay" readonly></textarea>
 
 <p>Upload PDF copy of written material
-</body>
 <script>
 document.getElementById('form').addEventListener('submit', function(event)      // On submit processing
  {event.preventDefault();                                                       // Prevent default form submission
@@ -262,4 +267,5 @@ document.getElementById('form').addEventListener('submit', function(event)      
   jsonDisplay.scrollIntoView();
  })
 </script>
+</body>
 </html>

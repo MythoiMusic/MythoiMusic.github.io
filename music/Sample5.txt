@@ -1,0 +1,21 @@
+{
+  "MythoiMusic": "20240704",
+  "Genre": "rock",
+  "Content": "Music and lyrics",
+  "Languages": "english",
+  "PublicDomain": "yes",
+  "Samples": "yes",
+  "Publishers": "yes",
+  "Publisher": "1111",
+  "FullName": "1111",
+  "Role": "Author",
+  "ProNumber": "1111",
+  "ProAffiliation": "123",
+  "WritersShare": "0",
+  "Artists": "yes",
+  "Recordings": "yes",
+  "Film": "yes",
+  "Title": "1111111111111",
+  "LegalName": "1111111111111",
+  "Name": "Animation"
+}
