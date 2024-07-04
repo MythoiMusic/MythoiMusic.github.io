@@ -1,0 +1,22 @@
+# Sample music description created from data collection html
+{
+  "MythoiMusic": 20240704,
+  "Genre": "orchestral",
+  "Content": "Music only",
+  "Languages": "english",
+  "PublicDomain": "yes",
+  "Samples": "yes",
+  "Publishers": "yes",
+  "Publisher": "aaaaaaaa",
+  "FullName": "aaaaaa",
+  "Role": "Author",
+  "ProNumber": "1111",
+  "ProAffiliation": "111",
+  "WritersShare": "11",
+  "Artists": "yes",
+  "Recordings": "yes",
+  "Film": "yes",
+  "Title": "1111111111111",
+  "LegalName": "1111111111111",
+  "Name": "Teleplay"
+}
