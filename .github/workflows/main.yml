@@ -1,0 +1,38 @@
+# Test 2024-07-04 at 03:06:41
+
+name: Test
+
+on:
+  push:
+    paths:
+      - '**/main.yml'
+      - '**.txt'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  test:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: 'main'
+
+    - name: Cpan
+      run:  sudo cpan install -T Data::Dump Data::Table::Text GDS2 Digest::SHA1
+
+    - name: Scan
+      run: |
+        perl catalog.pl
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: Catalog
+        path: |
+          catalog.html
+          catalog.csv
