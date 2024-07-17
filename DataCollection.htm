@@ -6,7 +6,8 @@
     body p {max-width: 40em;}
     li {margin-bottom: 10px;}
     form       {display: flex; flex-direction: column; gap:5vh;}
-    .container {display: flex; flex-direction: column; gap:1vh;}
+    .rowContainer {display: flex; flex-direction: row; gap:5vw;}
+    .colContainer {display: flex; flex-direction: column; gap:1vh;}
     #jsonDisplay {
             width: 80vw;
             height: 50vh;
@@ -19,13 +20,17 @@
 
 <body>
 
-<form id="form" class="container">
 
 <h1>Data required for a registration</h1>
 
-<h2>Music Title</h2>
+<div class="rowContainer">
+<h2 id="music">Music Title</h2>
+<h2 id="text">Text Work</h2>
+</div>
 
-<fieldset class="container">
+<form id="musicForm" class="colContainer">
+
+<fieldset class="colContainer">
   <legend>Genre type:</legend>
   <label><input type="radio" name="genre" value="choral"          required=1>Classical - Choral     </label>
   <label><input type="radio" name="genre" value="orchestral"      required=1>Classical - Orchestral </label>
@@ -38,13 +43,13 @@
   <label><input type="radio" name="genre" value="musical_theatre" required=1>Musical Theatre        </label>
 </fieldset>
 
-<fieldset class="container">
+<fieldset class="colContainer">
 <legend>Work content:</legend>
     <label><input type="radio" name="content" value="Music and lyrics" required=1>Music and lyrics</label>
     <label><input type="radio" name="content" value="Music only"       required=1>Music only      </label>
 </fieldset>
 
-<fieldset class="container">
+<fieldset class="colContainer">
   <legend>Language of the work:</legend>
   <select id="languages" name="languages">
     <optgroup label="European Languages">
@@ -115,39 +120,39 @@
   </select>
 </fieldset>
 
-<h2>Rights questions</h2>
+<h3>Rights questions</h3>
 
-<fieldset class="container">
+<fieldset class="colContainer">
   <legend>Is this work an arrangement of a public domain work?</legend>
   <label><input type="radio" name="publicDomain" value="yes" required=1>Yes</label>
   <label><input type="radio" name="publicDomain" value="no"  required=1>No </label>
 </fieldset>
 
-<fieldset class="container">
+<fieldset class="colContainer">
   <legend>Does this work contain samples or medleys?</legend>
-  <label><input type="radio" name="samples" value="yes" required=1>Yes</label>
-  <label><input type="radio" name="samples" value="no"  required=1>No </label>
+  <label><input type="radio" name="samples" value="yes" required=1 onclick="assistance()">Yes</label>
+  <label><input type="radio" name="samples" value="no"  required=1                       >No </label>
 </fieldset>
 
-<h2>Publication</h2>
+<h3>Publication</h3>
 
-<fieldset class="container">
+<fieldset class="colContainer">
   <legend>Are there any publishers on this work?</legend>
   <label><input type="radio" name="publishers" value="yes" required=1>Yes</label>
   <label><input type="radio" name="publishers" value="no"  required=1>No </label>
 </fieldset>
 
-<fieldset class="container">
+<fieldset class="colContainer">
 <label for="publisher">If yes, list the name of the publishing company: </label>
   <input type="text" id="publisher" name="publisher">
 </fieldset>
 
-<fieldset class="container">
+<fieldset class="colContainer">
   <legend>Authorial Identification</legend>
 
   <label for="fullName">Author's Full Legal Name: <input type="text" id="fullName" name="fullName" required=1></label>
 
-  <fieldset class="container">
+  <fieldset class="colContainer">
     <legend>Choose Role</legend>
 
     <label for="author">        <input type="radio" id="author"         name="role" value="Author"          required=1>Author</label>
@@ -163,27 +168,33 @@
 </fieldset>
 
 
-<h2>Recording</h2>
+<h3>Recording</h3>
 
-<fieldset class="container">
+<fieldset class="colContainer">
   <legend>Are there any artists?</legend>
   <label><input type="radio" name="artists" value="yes" required=1>Yes</label>
   <label><input type="radio" name="artists" value="no"  required=1>No </label>
 </fieldset>
 
-<fieldset class="container">
+<fieldset class="colContainer">
   <legend>Are there any recordings?</legend>
   <label><input type="radio" name="recordings" value="yes" required=1>Yes</label>
   <label><input type="radio" name="recordings" value="no"  required=1>No </label>
 </fieldset>
 
-<fieldset class="container">
+<fieldset class="colContainer">
   <legend>Was this work created for film, television, or a music library?</legend>
   <label><input type="radio" name="film" value="yes" required=1>Yes</label>
   <label><input type="radio" name="film" value="no"  required=1>No </label>
 </fieldset>
 
-<fieldset class="container">
+<input id="submit" type="submit" value="Save">
+</form>
+
+
+<form id="textForm" class="colContainer">
+
+<fieldset class="colContainer">
   <legend>Writing</legend>
 
   <label for="title">Title: </label>
@@ -193,7 +204,7 @@
   <input type="text" id="legalName" name="legalName" required=1>
 </fieldset>
 
-<fieldset class="container">
+<fieldset class="colContainer">
 <legend>Work type</legend>
 <label><input type="radio" name="name" value="Animation"    required=1>Animation    </label>
 <label><input type="radio" name="name" value="Art"          required=1>Art          </label>
@@ -229,9 +240,17 @@ well to complete your registration of this piece of music.</p>
 <textarea id="jsonDisplay" readonly></textarea>
 
 <p>Upload PDF copy of written material
+
+<dialog id="medleyAssistance">
+  <div class="colContainer">
+    <p>Please contact us at <a href="mailto:mythoimusic@protonmail.com">mythoimusic@protonmail.com</a> for assistance with musical works that contain samples or medleys</p>
+    <button id="medleyAssistanceClose" autofocus>Close</button>
+  </div>
+</dialog>
+
 <script>
-document.getElementById('form').addEventListener('submit', function(event)      // On submit processing
- {event.preventDefault();                                                       // Prevent default form submission
+musicForm.addEventListener('submit', function(event)                            // On submit of music form
+ {event.preventDefault();
 
   function gf(name)
    {const e = document.querySelector('input[name="'+name+'"]:checked')
@@ -243,7 +262,8 @@ document.getElementById('form').addEventListener('submit', function(event)      
    }
 
   const dictionary = {
-  "MythoiMusic"      : "20240704",
+  "MythoiMusic"      : "20240717",
+  "Music"            : true,
   "Genre"            : gf("genre"),
   "Content"          : gf("content"),
   "Languages"        : languages          .value,
@@ -259,6 +279,26 @@ document.getElementById('form').addEventListener('submit', function(event)      
   "Artists"          : gf("artists"),
   "Recordings"       : gf("recordings"),
   "Film"             : gf("film"),
+  }
+  jsonDisplay.value = JSON.stringify(dictionary, null, 2);
+  jsonDisplay.scrollIntoView();
+ })
+
+textForm.addEventListener('submit', function(event)                             // On submit of text form
+ {event.preventDefault();
+
+  function gf(name)
+   {const e = document.querySelector('input[name="'+name+'"]:checked')
+    if (!e)
+     {console.log("Missing: "+name)
+      return ''
+     }
+    else return e.value
+   }
+
+  const dictionary = {
+  "MythoiMusic"      : "20240717",
+  "Text"             : true,
   "Title"            : title              .value,
   "LegalName"        : legalName          .value,
   "Name"             : gf("name")
@@ -266,6 +306,47 @@ document.getElementById('form').addEventListener('submit', function(event)      
   jsonDisplay.value = JSON.stringify(dictionary, null, 2);
   jsonDisplay.scrollIntoView();
  })
+
+function showMusic()                                                            // Show music form
+ {textForm .style.display     = 'none'
+  textForm .style.visibility  = 'hidden'
+  text     .style.color       = 'black'
+  musicForm.style.display     = 'block'
+  musicForm.style.visibility  = 'visible'
+  music    .style.color       = '#009150'
+ }
+
+function showText()                                                             // Show text form
+ {musicForm.style.display     = 'none'
+  musicForm.style.visibility  = 'hidden'
+  music    .style.color       = 'black'
+  textForm .style.display     = 'block'
+  textForm .style.visibility  = 'visible'
+  text     .style.color       = '#009150'
+ }
+
+music.addEventListener('click', function(event)                                 // Clicked music
+ {event.preventDefault()
+  showMusic()
+ })
+
+text.addEventListener('click', function(event)                                  // Clicked text
+ {event.preventDefault()
+  showText()
+ })
+
+function assistance()
+ {const selectedValue = document.querySelector('input[name="samples"]:checked').value;
+  if (selectedValue === "yes")
+   {medleyAssistance.showModal()
+   }
+}
+
+medleyAssistanceClose.addEventListener('click', function(event)                 // Clicked close medley assistance
+ {medleyAssistance.close()
+ })
+
+showMusic()                                                                     // Show music by default
 </script>
 </body>
 </html>
