@@ -1,3 +1,8 @@
+.~lock.catalog.csv#
+catalog.csv
+images/*
+pushToGitHub.pl
+
 *.html
 # Node modules
 node_modules/
