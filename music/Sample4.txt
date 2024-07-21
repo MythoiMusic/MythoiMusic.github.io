@@ -1,21 +1,7 @@
 {
-  "MythoiMusic": "20240704",
-  "Genre": "rock",
-  "Content": "Music only",
-  "Languages": "english",
-  "PublicDomain": "no",
-  "Samples": "no",
-  "Publishers": "no",
-  "Publisher": "",
-  "FullName": "philip brenan",
-  "Role": "Composer/Author",
-  "ProNumber": "123",
-  "ProAffiliation": "123",
-  "WritersShare": "11",
-  "Artists": "no",
-  "Recordings": "yes",
-  "Film": "no",
-  "Title": "Another day, another sunset",
-  "LegalName": "philip r brenan",
-  "Name": "Proposal"
+  "MythoiMusic": "20240717",
+  "Text": "true",
+  "Title": "bbbbb",
+  "LegalName": "bbbb",
+  "Name": "Concept"
 }

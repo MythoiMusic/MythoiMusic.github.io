@@ -21,9 +21,9 @@ my @m;
 for my $f(@f)                                                                   # Read each txt file for details of each piece of music
  {my $D = readFile $f;
      $D =~ s(":) (" =>)gs;
-  my $d = eval $D;
+  my $d = eval $D;                                                              # Load txt file containing one entry
   say STDERR $@ if $@;
-  push @m, {%$d, file=>$f};
+  push @m, {%$d, file=>$f};                                                     # Add file from whence came the data
  }
 
 say STDERR "Mythoi Music Cataloger 202407";
@@ -33,28 +33,36 @@ if (!@m)
   exit(1)
  }
 
-my @k = sort keys $m[0]->%*;                                                    # Column headers
+my %k = map {$_->%*} @m;                                                        # Keys present over all files
+my @k = sort keys %k;                                                           # Column header order
 
-if (@m)
- {my @h = <<END;                                                                # Create html
+my @c = join ', ',  @k;                                                         # Create csv
+my @h = <<END;                                                                  # Create html
 <table border=0 cellpadding=10>
 END
-  my @c = join ', ',  @k;                                                       # Create csv
 
-  push @h, join ' ', '<tr>', map {"<th>$_"} @k;                                 # Table column headers
+push @h, join ' ', '<tr>', map {"<th>$_"} @k;                                   # Table column headers
 
-  for my $i(keys @m)                                                                 # Each file
-   {my $m = $m[$i];
-    say STDERR sprintf "%6d %s", $i+1, $$m{file};
-    push @h, join ' ', "<tr>", map {"<td>".$$m{$_}} @k;
-    push @c, join ', ',           map {qq("$$m{$_}")} @k;
+for my $i(keys @m)                                                              # Each file
+ {my $m = $m[$i];
+  say STDERR sprintf "%6d %s", $i+1, $$m{file};                                 # File being read
+  my @H = "<tr>";                                                               # Html row created from file being read
+  my @C;                                                                        # Csv row from file being read
+  for my $j(keys @k)                                                            # Each key in order
+   {my $k = $k[$j];
+    my $v = $$m{$k} // '';
+    push @H, qq(<td>$v);
+    push @C, dump($v);                                                          # Quote for csv
    }
-  push @h, <<END;
+  push @h, join '',  @H;
+  push @c, join ',', @C;
+ }
+
+push @h, <<END;
 </table>
 END
 
-  owf $catalogHtm, join "\n", @h;
-  owf $catalogCsv, join "\n", @c;
- }
+owf $catalogHtm, join "\n", @h;
+owf $catalogCsv, join "\n", @c;
 
 say STDERR scalar(@m), " files cataloged"

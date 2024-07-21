@@ -20,7 +20,7 @@ my $wf    = q(.github/workflows/main.yml);                                      
    $repo  = q(MythoiMusic.github.io);                                           # Repo
 
 
-push my @files, searchDirectoryTreesForMatchingFiles($home, qw(.txt .pl .htm));
+push my @files, searchDirectoryTreesForMatchingFiles($home, qw(.htm .md .pl .png .txt));
 
 for my $s(@files)                                                               # Upload each selected file
  {my $c = readBinaryFile $s;                                                    # Load file
